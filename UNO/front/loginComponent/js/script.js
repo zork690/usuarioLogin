@@ -12,16 +12,15 @@ $(document).ready(()=>{
 });
 
 function ingresar(){
-    console.log("dfdsfsdkl");
-    url = "/ingresar";
+    url = "/usuario";
     urlCompleta = SERVIDOR + url;
     obj = {
         username: $("#usuarioInput").val(),
-        clave: $("#claveInput").val()
+        password: $("#claveInput").val()
     }
 
-    console.log("ENVIANDO LOGIN ...", obj);
-    peticionAjax("POST", urlCompleta, obj).then((respuesta) => {
+    console.log("ENVIANDO LOGIN ...", obj, $("#usuarioInput").val(), $("#claveInput").val());
+    peticionAjax("GET", urlCompleta, obj, $("#usuarioInput").val(), $("#claveInput").val()).then((respuesta) => {
         console.log(respuesta);
     }).catch((error) => {
         console.log(error);

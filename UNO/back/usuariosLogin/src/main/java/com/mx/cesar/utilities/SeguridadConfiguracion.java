@@ -51,7 +51,9 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers("/usuario").hasRole("USER")
 		.antMatchers("/ingresar").permitAll()
-		.and().formLogin();
+		//.and().formLogin();
+		.and()
+        .httpBasic();
 		// all other requests need to be authenticated
 				//.anyRequest().authenticated().and().
 		// make sure we use stateless session; session won't be used to
