@@ -33,36 +33,36 @@ public class LoginRestController {
 	
 	private static final Logger log = LoggerFactory.getLogger(LoginRestController.class);
 	
-	@Autowired
+	/*@Autowired
 	AuthenticationManager authenticationManager;
 	
 	@Autowired
 	UserDetailServiceImpl userDetailServiceImpl;
 	
 	@Autowired
-	JwtService jwtService;
+	JwtService jwtService;*/
 	
 	//@PreAuthorize("authenticated")
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping("/ingresar")
 	public ResponseEntity<?> ingresar(@RequestBody Usuario usuario) throws Exception {
-		Usuario u = this.userDetailServiceImpl.buscarUsuarioPorNombre(usuario.getUsername());
+		/*Usuario u = this.userDetailServiceImpl.buscarUsuarioPorNombre(usuario.getUsername());
 		log.error("Usuario: "+u);
 		if(u != null) {
 			log.error("PASS ENCODED: "+new BCryptPasswordEncoder().encode(u.getClave()));
 			this.authenticate(usuario.getUsername(), u.getClave());
-		}
+		}*/
 		return ResponseEntity.ok("fdg");
 	}
 	
 	//@PreAuthorize("authenticated")
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/ingresar")
+	@GetMapping("/usuario")
 	public String ingresaret()  {
-		return "fdg";
+		return "BIENVENIDO USUARIO";
 	}
 	
-	private void authenticate(String username, String password) throws Exception {
+	/*private void authenticate(String username, String password) throws Exception {
 		try {
 		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 		} catch (DisabledException e) {
@@ -70,6 +70,6 @@ public class LoginRestController {
 		} catch (BadCredentialsException e) {
 		throw new Exception("INVALID_CREDENTIALS", e);
 		}
-		}
+		}*/
 
 }

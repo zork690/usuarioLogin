@@ -32,14 +32,15 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	}
 	
 	@Override
-	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario u = this.usuarioDao.findByUsername(username);
+		
+		return new UsuarioDetails(u);
 				
-		if (u == null)
+		/*if (u == null)
 			throw new UsernameNotFoundException("Could not find user");
 		
-			return new UsuarioDetails(u);
+			return new UsuarioDetails(u);*/
 		
 	}
 	

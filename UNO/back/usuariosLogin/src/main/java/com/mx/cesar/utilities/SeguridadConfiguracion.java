@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
@@ -32,28 +33,25 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
 	UserDetailsService userDetailService;
 	
 	@Autowired
-	DataSource datasource;
-	
-	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		//auth.userDetailsService(userDetailService).passwordEncoder(this.passwordEncoder());
-		auth.jdbcAuthentication()
-		.dataSource(datasource);
-		/*auth.inMemoryAuthentication()
-		.withUser("myUsuarioTest").password("$2a$10$f.Pm1GMMyMswSOqz7.dzLOlvD0x.kmaDHKeZI710mjwhXkMg.tnR.").roles("USER");*/
-	
+		auth.userDetailsService(userDetailService);
+		
 	}
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(); 
+		//return new BCryptPasswordEncoder();
+		return NoOpPasswordEncoder.getInstance();
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable()
 		// dont authenticate this particular request
-		.authorizeRequests().antMatchers("/ingresar").hasRole("USER");
+		.authorizeRequests()
+		.antMatchers("/usuario").hasRole("USER")
+		.antMatchers("/ingresar").permitAll()
+		.and().formLogin();
 		// all other requests need to be authenticated
 				//.anyRequest().authenticated().and().
 		// make sure we use stateless session; session won't be used to
@@ -66,8 +64,6 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
 		
 		http.headers().frameOptions().sameOrigin();
 		
-		//http.addFilterBefore(this.jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
-		
 	}
 	
 	//@Bean
@@ -75,8 +71,8 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
 		return new JwtAuthorizationFilter();
 	}
 	
-	@Bean
-	@Override
+	//@Bean
+	//@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
