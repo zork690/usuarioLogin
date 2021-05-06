@@ -13,6 +13,6 @@ import com.mx.cesar.entities.Usuario;
 public interface IUsuarioDao extends JpaRepository<Usuario, String>{
 	
 	@Query("SELECT u FROM Usuario u WHERE u.username = :username")
-	public Usuario findByUsername(@Param("username") String username);
+	public Optional<Usuario> findByUsername(@Param("username") String username);
 
 }

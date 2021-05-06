@@ -9,6 +9,9 @@ CREATE TABLE USUARIO (
 
 INSERT INTO USUARIO (LOGIN, CLAVE, NOMBRE, CLIENTE) VALUES
   ('DKDKFDKLDF', 'skdkkdkd', 'skdskkd Industrialist', 1);
+  
+  INSERT INTO USUARIO (LOGIN, CLAVE, NOMBRE, CLIENTE) VALUES
+  ('fff', 'pass', 'cesar', 1);
 
 
 
