@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../bootstrap5/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/estilos.css" />
+
+</head>
+
+<body class="bg-dark text-white">
+    <h1 class="display-1 text-center">ADEA<small>&reg;</small></h1>
+    <h3 class="text-center mb-5"><b style="color: 0000FF;">ADEA</b></h3>
+
+    <hr />
+
+    <h1>Login</h1>
+
+    <input type="text" id="usuarioInput" placeholder="Ingrese Usuario" class="form-control my-4" id="usuario">
+    <input type="password" id="claveInput" placeholder="Ingrese Clave" class="form-control" id="usuario">
+    <button class="btn btn-primary my-4" id="loginButon" onclick="ingresar()">INGRESAR</button>
+
+    <a href="javascript:void(0)" class="olvido mx-3" onclick="pedirClave()">Olvide mi contraseña</a>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="../bootstrap5/js/bootstrap.min.js"></script>
+    <script src="../Globales/js/objeto_ajax.js"></script>
+    <script src="../Globales/js/peticionAjax.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
