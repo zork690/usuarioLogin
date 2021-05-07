@@ -55,10 +55,18 @@ public class LoginRestController {
 			  username = principal.toString();
 			}
 		
-		
-		
-		
 		return ResponseEntity.ok(u.get());
+	}
+	
+	
+	//@PreAuthorize("authenticated")
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@PostMapping("/cambiar")
+	public ResponseEntity<?> ingresar(@RequestBody Usuario usuario) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		log.error("NUEVA CLAVE ES: "+usuario.getClave());
+		this.usuarioDetailService.cambiarClave(principal, usuario.getClave());
+		return ResponseEntity.ok(this.usuarioDetailService.buscarUsuarioPorNombre(((UserDetails)principal).getUsername()));
 	}
 
 }

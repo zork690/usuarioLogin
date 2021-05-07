@@ -23,5 +23,6 @@ function peticionAjax(metodo, url, parametros=null, usuario, clave) {
         //objeto_ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
         objeto_ajax.setRequestHeader("Authorization", "Basic " + btoa(usuario + ":" + clave));
         objeto_ajax.send(JSON.stringify(parametros));
+        //objeto_ajax.send("username=John&password=Smith&grant_type=password");
     });
 }

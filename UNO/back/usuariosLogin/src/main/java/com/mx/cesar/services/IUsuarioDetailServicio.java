@@ -7,5 +7,6 @@ import com.mx.cesar.entities.Usuario;
 public interface IUsuarioDetailServicio {
 	
 	public Optional<Usuario> buscarUsuarioPorNombre(String nombre);
+	public void cambiarClave(Object principal, String nuevaClave);
 
 }

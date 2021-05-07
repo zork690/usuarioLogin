@@ -50,6 +50,7 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
 		// dont authenticate this particular request
 		.authorizeRequests()
 		.antMatchers("/usuario").hasRole("USER")
+		.antMatchers("/cambiar").hasRole("USER")
 		.antMatchers("/ingresar").permitAll()
 		//.and().formLogin();
 		.and()

@@ -59,4 +59,12 @@ public class UserDetailServiceImpl implements UserDetailsService, IUsuarioDetail
 		return new User(usuario, clave, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 	}
 
+	@Override
+	public void cambiarClave(Object principal, String nuevaClave) {
+		Optional<Usuario> u = this.buscarUsuarioPorNombre(((UserDetails)principal).getUsername());
+		u.get().setClave(nuevaClave);
+		this.usuarioDao.save(u.get());
+		
+	}
+
 }
