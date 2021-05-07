@@ -21,7 +21,7 @@ import com.mx.cesar.daos.IUsuarioDao;
 import com.mx.cesar.entities.Usuario;
 
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
+public class UserDetailServiceImpl implements UserDetailsService, IUsuarioDetailServicio {
 	
 	@Autowired
 	private IUsuarioDao usuarioDao;

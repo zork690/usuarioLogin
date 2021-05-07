@@ -21,7 +21,11 @@ function ingresar(){
 
     console.log("ENVIANDO LOGIN ...", obj, $("#usuarioInput").val(), $("#claveInput").val());
     peticionAjax("GET", urlCompleta, obj, $("#usuarioInput").val(), $("#claveInput").val()).then((respuesta) => {
-        console.log(respuesta);
+        console.log(JSON.parse(respuesta));
+        
+        procesarRespuesta(JSON.parse(respuesta));
+
+
     }).catch((error) => {
         console.log(error);
     });
@@ -46,3 +50,18 @@ claveInput.keyup(()=>{
     else
         loginButon.hide();
 });
+
+function procesarRespuesta(respuesta){
+    console.log("PROCESANDO RESPUESTA...",respuesta);
+    setResuesta("cookieUsuario", JSON.stringify(respuesta));
+    window.location.href="../cambiarClaveComponent/cambiarClave.html"
+}
+
+function setResuesta(c_name,value) {
+   localStorage.setItem(c_name, value);
+   console.log("COOKIE ",getRespuesta(c_name));
+}
+
+function getRespuesta(cname) {
+    return JSON.parse(localStorage.getItem(cname));
+}

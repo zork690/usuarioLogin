@@ -1,5 +1,7 @@
 package com.mx.cesar.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,6 +23,9 @@ public class Usuario {
 
 	@Column(name = "CLIENTE")
 	private String cliente;
+	
+	@Column(name = "FECHAMODIFICACION")
+	private Date fechaModificacion;
 
 	public String getLogin() {
 		return login;
@@ -53,10 +58,22 @@ public class Usuario {
 	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	}
-	
+
+	public Date getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	public void setFechaModificacion(Date fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [login=" + login + ", clave=" + clave + ", username=" + username + ", cliente=" + cliente + "]";
+		return "Usuario [login=" + login + ", clave=" + clave + ", username=" + username + ", cliente=" + cliente
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
+	
+	
+	
 
 }

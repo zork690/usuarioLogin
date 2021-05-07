@@ -2,6 +2,7 @@ package com.mx.cesar.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mx.cesar.entities.Usuario;
+import com.mx.cesar.services.IUsuarioDetailServicio;
 import com.mx.cesar.services.JwtService;
 import com.mx.cesar.services.UserDetailServiceImpl;
 import com.mx.cesar.services.UsuarioDetails;
@@ -35,43 +37,28 @@ public class LoginRestController {
 	
 	private static final Logger log = LoggerFactory.getLogger(LoginRestController.class);
 	
-	/*@Autowired
-	AuthenticationManager authenticationManager;
-	
 	@Autowired
-	UserDetailServiceImpl userDetailServiceImpl;
+	private IUsuarioDetailServicio usuarioDetailService;
 	
-	@Autowired
-	JwtService jwtService;*/
-	
-	//@PreAuthorize("authenticated")
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PostMapping("/ingresar")
-	public ResponseEntity<?> ingresar(@RequestBody Usuario usuario) throws Exception {
-		/*Usuario u = this.userDetailServiceImpl.buscarUsuarioPorNombre(usuario.getUsername());
-		log.error("Usuario: "+u);
-		if(u != null) {
-			log.error("PASS ENCODED: "+new BCryptPasswordEncoder().encode(u.getClave()));
-			this.authenticate(usuario.getUsername(), u.getClave());
-		}*/
-		return ResponseEntity.ok("fdg");
-	}
-	
-	//@PreAuthorize("authenticated")
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/usuario")
-	public String ingresaret()  {
+	public ResponseEntity<?> ingresaret()  {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username;
+		Optional<Usuario> u = null;
+		
 		if (principal instanceof UserDetails) {
 			  username = ((UserDetails)principal).getUsername();
+			  u = this.usuarioDetailService.buscarUsuarioPorNombre(username);
+			  log.error("USUARIO LOGUEADO: "+u.get());
 			} else {
 			  username = principal.toString();
 			}
 		
-		log.error("USUARIO LOGUEADO: "+username);
 		
-		return "BIENVENIDO USUARIO";
+		
+		
+		return ResponseEntity.ok(u.get());
 	}
 
 }

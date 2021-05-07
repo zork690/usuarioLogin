@@ -7,7 +7,7 @@ function peticionAjax(metodo, url, parametros=null, usuario, clave) {
                 resuelve(objeto_ajax.responseText);
             }
 
-if((objeto_ajax.readyState == 4) && objeto_ajax.status == 401)
+            if((objeto_ajax.readyState == 4) && objeto_ajax.status == 401)
                 rechaza("BAD CREDENTIALS");
 
             if((objeto_ajax.readyState == 4) && (objeto_ajax.status != 200)){
